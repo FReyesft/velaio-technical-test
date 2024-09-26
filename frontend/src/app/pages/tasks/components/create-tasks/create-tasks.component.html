@@ -3,18 +3,104 @@
     <h1 class="title">Crear Tareas</h1>
     <p>Añade nuevas tareas y asignalas a un usuario en especifico.</p>
   </header>
-  <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
-    <mat-form-field class="example-full-width">
-      <mat-label>Nombre completo</mat-label>
-      <input matInput placeholder="Ex. Fernando Reyez Pinto" formControlName="personName">
-    </mat-form-field>
+  <div class="container-task">
+    <form [formGroup]="taskForm" (ngSubmit)="submitTask()" class="form">
+      <h3 class="label-form">Tarea</h3>
+      <mat-form-field>
+        <mat-label>Nombre de la tarea</mat-label>
+        <input
+          matInput
+          placeholder="Ex. Realizar testing"
+          formControlName="taskName"
+        />
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Fecha limite</mat-label>
-      <input matInput formControlName="taskLimitDate" [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </form>
+      <mat-form-field>
+        <mat-label>Fecha limite</mat-label>
+        <input
+          matInput
+          formControlName="taskLimitDate"
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <div class="sub-group-form" formGroupName="taskAssociatedPersons">
+        <h3 class="label-form">Personas asociadas:</h3>
+        <mat-form-field>
+          <mat-label>Nombre completo</mat-label>
+          <input
+            matInput
+            placeholder="Ex. Fernando Reyez Pinto"
+            formControlName="personName"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Edad (min 18)</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="Ex. 22"
+            formControlName="personAge"
+          />
+        </mat-form-field>
+        <div class="skills-form">
+          <mat-form-field class="example-chip-list">
+            <mat-label>Habilidades</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter fruits">
+              <mat-chip-row
+                *ngFor="let skill of skills"
+                (removed)="removeSkill(skill)"
+                [editable]="true"
+                (edited)="editSkill(skill, $event)"
+                [aria-description]="'presione enter ' + skill"
+              >
+                {{ skill.name }}
+                <button matChipRemove [attr.aria-label]="'eliminar ' + skill">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              <input
+                placeholder="Nueva habilidad..."
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addSkill($event)"
+              />
+            </mat-chip-grid>
+          </mat-form-field>
+        </div>
+        <button (click)="addPerson($event)" mat-raised-button>
+          Añadir persona
+        </button>
+      </div>
+      <aside class="container-persons--added">
+        <h3 class="label-form">
+          Personas asociadas: {{ persons.length || 0 }}
+        </h3>
+        <mat-chip-row
+          *ngFor="let person of persons"
+          (removed)="removePerson(person)"
+          [editable]="true"
+          [aria-description]="'presione enter ' + person"
+        >
+          {{ person.name }}
+          <button matChipRemove [attr.aria-label]="'eliminar ' + person">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </aside>
+      <button
+        class="submit-button"
+        [disabled]="persons.length <= 0"
+        type="submit"
+        mat-raised-button
+      >
+        Guardar tarea
+      </button>
+    </form>
+  </div>
 </section>

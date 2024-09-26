@@ -1,0 +1,50 @@
+.container-task {
+  display: flex;
+  flex-direction: column;
+  column-gap: 8px;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-persons--added {
+  width: 100%;
+}
+
+.label-form {
+  padding: 0;
+  margin: 0;
+}
+
+.sub-group-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-form {
+  display: flex;
+  column-gap: 8px;
+  flex-direction: column;
+}
+
+.skills-form__input {
+  margin-left: 16px;
+  display: flex;
+  column-gap: 8px;
+  flex-direction: row;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 16px;
+}
+
+.submit-button {
+  margin-top: 16px;
+}
