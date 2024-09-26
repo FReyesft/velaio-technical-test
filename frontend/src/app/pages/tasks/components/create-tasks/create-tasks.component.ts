@@ -48,6 +48,7 @@ export class CreateTasksComponent implements OnInit {
     } else {
       try {
         this.tasksService.addTask({
+          id: this.tasksService?.getTasks()?.length + 1 || 1,
           taskName: this.taskForm.get('taskName').value,
           taskLimitDate: this.taskForm.get('taskLimitDate').value,
           persons: this.persons,
@@ -60,7 +61,7 @@ export class CreateTasksComponent implements OnInit {
         this.skills = [];
         this.openSnackBar('La tarea se creo correctamente', '');
       } catch (error) {
-        this.openSnackBar('Ocurrio un error creando la tarea', '');
+        this.openSnackBar('Ocurrio un error creando la tarea', error.message);
       }
     }
   }
