@@ -124,13 +124,11 @@ export class CreateTasksComponent implements OnInit {
   isValidToAddPersons(): boolean {
     //Get values from subgroup taskAssociatedPersons
     const name: string = this.taskForm.get('taskAssociatedPersons.personName').value;
-    const age: number = Number(this.taskForm.get('taskAssociatedPersons.personAge').value);
     const isPersonExist = this.persons.some((person) => person?.name?.toLowerCase() === name?.toLowerCase());
     if (
       this.skills.length <= 0 || // Validate if the actually person has one or more skills
       isPersonExist || // Validate if the person exist into persons Array
-      !this.taskForm.valid ||
-      age < 18 // Validate Age can't be minor than 18
+      !this.taskForm.valid
     ) {
       return false;
     } else {
