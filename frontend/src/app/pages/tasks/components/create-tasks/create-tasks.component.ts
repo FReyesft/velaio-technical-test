@@ -43,6 +43,8 @@ export class CreateTasksComponent implements OnInit {
     } else {
       this.addValidators();
       this.taskForm.reset();
+      this.persons = [];
+      this.skills = [];
       this.openSnackBar('La tarea se creo correctamente', '');
     }
     console.log(this.taskForm);
