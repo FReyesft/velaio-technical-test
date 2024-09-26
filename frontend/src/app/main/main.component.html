@@ -1,12 +1,9 @@
-<main class="main-layout">
-  <nav>
-    <ul>
-      <li><a routerLink="/">Crear y asignar tareas</a></li>
-      <li><a routerLink="/tasks/list">Listado de Tareas</a></li>
-    </ul>
-  </nav>
-  <div class="layout-wrapper">
-    <router-outlet></router-outlet>
-    <footer>Footer</footer>
+<main class="container">
+  <app-navbar></app-navbar>
+  <div class="innerContainer">
+    <div class="outlet">
+      <router-outlet></router-outlet>
+    </div>
   </div>
+  <app-footer></app-footer>
 </main>
