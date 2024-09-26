@@ -36,31 +36,42 @@ export class CreateTasksComponent implements OnInit {
   }
 
   submitTask() {
-    this.removeValidators();
+    this.removeValidators(); //Remove validators from taskAssocciatedPersons
     if (!this.taskForm.valid) {
-      this.addValidators();
+      this.addValidators(); // If the form is invalid add validators for taskAssocciatedPersons
       return;
     } else {
+      // If the task is created correctly add validators for taskAssocciatedPersons and reset form
       this.addValidators();
       this.taskForm.reset();
       this.persons = [];
       this.skills = [];
       this.openSnackBar('La tarea se creo correctamente', '');
     }
-    console.log(this.taskForm);
   }
 
   removeValidators() {
+    //Remove validators from subgroup taskAssociatedPersons
     this.taskForm.get('taskAssociatedPersons.personName').clearValidators();
     this.taskForm.get('taskAssociatedPersons.personAge').clearValidators();
 
-    this.taskForm.get('taskAssociatedPersons.personName').updateValueAndValidity();
-    this.taskForm.get('taskAssociatedPersons.personAge').updateValueAndValidity();
+    // Say to the form for updated changes
+    this.taskForm
+      .get('taskAssociatedPersons.personName')
+      .updateValueAndValidity();
+    this.taskForm
+      .get('taskAssociatedPersons.personAge')
+      .updateValueAndValidity();
   }
 
   addValidators() {
-    this.taskForm.get('taskAssociatedPersons.personName').addValidators([Validators.required, Validators.minLength(5)]);
-    this.taskForm.get('taskAssociatedPersons.personAge').addValidators([Validators.required, Validators.min(18)]);
+    //Add validators for subgroup taskAssociatedPersons
+    this.taskForm
+      .get('taskAssociatedPersons.personName')
+      .addValidators([Validators.required, Validators.minLength(5)]);
+    this.taskForm
+      .get('taskAssociatedPersons.personAge')
+      .addValidators([Validators.required, Validators.min(18)]);
   }
 
   addSkill(event: MatChipInputEvent): void {
@@ -96,21 +107,15 @@ export class CreateTasksComponent implements OnInit {
   }
 
   isValidToAddPersons(): boolean {
-    const name: string = this.taskForm.get(
-      'taskAssociatedPersons.personName'
-    ).value;
-    const age: number = Number(
-      this.taskForm.get('taskAssociatedPersons.personAge').value
-    );
-    const isPersonExist = this.persons.some(
-      (person) => person?.name?.toLowerCase() === name?.toLowerCase()
-    );
-
+    //Get values from subgroup taskAssociatedPersons
+    const name: string = this.taskForm.get('taskAssociatedPersons.personName').value;
+    const age: number = Number(this.taskForm.get('taskAssociatedPersons.personAge').value);
+    const isPersonExist = this.persons.some((person) => person?.name?.toLowerCase() === name?.toLowerCase());
     if (
-      this.skills.length <= 0 ||
-      isPersonExist ||
+      this.skills.length <= 0 || // Validate if the actually person has one or more skills
+      isPersonExist || // Validate if the person exist into persons Array
       !this.taskForm.valid ||
-      age < 18
+      age < 18 // Validate Age can't be minor than 18
     ) {
       return false;
     } else {
@@ -120,14 +125,9 @@ export class CreateTasksComponent implements OnInit {
 
   addPerson(event: any) {
     event.preventDefault();
-    const name: string = this.taskForm.get(
-      'taskAssociatedPersons.personName'
-    ).value;
-    const age: number = Number(
-      this.taskForm.get('taskAssociatedPersons.personAge').value
-    );
+    const name: string = this.taskForm.get('taskAssociatedPersons.personName').value;
+    const age: number = Number(this.taskForm.get('taskAssociatedPersons.personAge').value);
 
-    //Validations
     if (!this.isValidToAddPersons()) return;
 
     this.persons.push({
@@ -140,6 +140,7 @@ export class CreateTasksComponent implements OnInit {
   }
 
   resetTaskAssociatedPersons() {
+    // Reset subgruop of taskAssociatedPersons and skills
     this.taskForm.get('taskAssociatedPersons').reset();
     this.skills = [];
   }
