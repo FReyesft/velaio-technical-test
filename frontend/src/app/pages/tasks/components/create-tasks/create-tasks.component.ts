@@ -5,6 +5,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Person } from 'src/app/interfaces/person.interface';
 import { Skill } from 'src/app/interfaces/skill.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-create-tasks',
@@ -18,7 +19,11 @@ export class CreateTasksComponent implements OnInit {
   public readonly separatorKeysCodes = [ENTER, COMMA] as const;
   public persons: Person[] = [];
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(
+    private tasksService: TasksService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.initTaskForm();
@@ -41,12 +46,22 @@ export class CreateTasksComponent implements OnInit {
       this.addValidators(); // If the form is invalid add validators for taskAssocciatedPersons
       return;
     } else {
-      // If the task is created correctly add validators for taskAssocciatedPersons and reset form
-      this.addValidators();
-      this.taskForm.reset();
-      this.persons = [];
-      this.skills = [];
-      this.openSnackBar('La tarea se creo correctamente', '');
+      try {
+        this.tasksService.addTask({
+          taskName: this.taskForm.get('taskName').value,
+          taskLimitDate: this.taskForm.get('taskLimitDate').value,
+          persons: this.persons,
+          isCompleted: false,
+        });
+        // If the task is created correctly add validators for taskAssocciatedPersons and reset form
+        this.addValidators();
+        this.taskForm.reset();
+        this.persons = [];
+        this.skills = [];
+        this.openSnackBar('La tarea se creo correctamente', '');
+      } catch (error) {
+        this.openSnackBar('Ocurrio un error creando la tarea', '');
+      }
     }
   }
 
