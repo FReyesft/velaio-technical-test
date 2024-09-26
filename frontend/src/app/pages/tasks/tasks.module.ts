@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TasksRoutingModule } from './tasks-routing.module';
 import { CreateTasksComponent } from './components/create-tasks/create-tasks.component';
 import { ListTasksComponent } from './components/list-tasks/list-tasks.component';
+import { MuiModule } from 'src/app/modules/mui/mui.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -11,7 +14,11 @@ import { ListTasksComponent } from './components/list-tasks/list-tasks.component
   ],
   imports: [
     CommonModule,
-    TasksRoutingModule
+    TasksRoutingModule,
+    MuiModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatNativeDateModule
   ]
 })
 export class TasksModule { }

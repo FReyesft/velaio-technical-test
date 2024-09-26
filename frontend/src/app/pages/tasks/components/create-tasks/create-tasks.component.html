@@ -1,1 +1,20 @@
-<p>create-tasks works!</p>
+<section class="section">
+  <header>
+    <h1 class="title">Crear Tareas</h1>
+    <p>Añade nuevas tareas y asignalas a un usuario en especifico.</p>
+  </header>
+  <form [formGroup]="taskForm" (ngSubmit)="submitTask()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombre completo</mat-label>
+      <input matInput placeholder="Ex. Fernando Reyez Pinto" formControlName="personName">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha limite</mat-label>
+      <input matInput formControlName="taskLimitDate" [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</section>

@@ -8,6 +8,10 @@ import { MainComponent } from './main/main.component';
 import { AppNavbarComponent } from './shared/app-navbar/app-navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MuiModule } from './modules/mui/mui.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +22,12 @@ import { FooterComponent } from './shared/footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MuiModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
