@@ -5,7 +5,6 @@ import { Task } from 'src/app/interfaces/task.interface';
   providedIn: 'root'
 })
 export class TasksService {
-  private _tasks: Task[] = [];
   constructor() { }
 
   public getTasks() {
@@ -14,7 +13,8 @@ export class TasksService {
   }
 
   public addTask(value: Task) {
-    this._tasks.push(value);
-    localStorage.setItem('tasks', JSON.stringify(this._tasks));
+    const tasks: Task[] = JSON.parse(localStorage.getItem('tasks'));
+    tasks.push(value);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 }
