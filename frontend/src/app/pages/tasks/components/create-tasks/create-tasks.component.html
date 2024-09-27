@@ -1,11 +1,10 @@
 <section class="section">
-  <header>
-    <h1 class="title">Crear Tareas</h1>
-    <p>Añade nuevas tareas y asignalas a un usuario en especifico.</p>
-  </header>
   <div class="container-task">
     <form [formGroup]="taskForm" (ngSubmit)="submitTask()" class="form">
-      <h3 class="label-form">Tarea</h3>
+      <header>
+        <h1 class="title">Crear Tareas</h1>
+        <p>Añade nuevas tareas y asignalas a un usuario en especifico.</p>
+      </header>
       <mat-form-field>
         <mat-label>Nombre de la tarea</mat-label>
         <input
@@ -49,7 +48,7 @@
         </mat-form-field>
         <div class="skills-form">
           <mat-form-field class="example-chip-list">
-            <mat-label>Habilidades</mat-label>
+            <mat-label>Habilidades*</mat-label>
             <mat-chip-grid #chipGrid aria-label="Enter fruits">
               <mat-chip-row
                 *ngFor="let skill of skills"
@@ -102,5 +101,6 @@
         Guardar tarea
       </button>
     </form>
+    <img class="caption-img" src="https://www.ntaskmanager.com/wp-content/uploads/2020/01/Task-Management-for-Mac-2.png"/>
   </div>
 </section>

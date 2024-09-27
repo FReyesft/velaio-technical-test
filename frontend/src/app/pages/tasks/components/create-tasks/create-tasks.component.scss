@@ -9,7 +9,6 @@
   column-gap: 8px;
 }
 
-
 .form {
   display: flex;
   flex-direction: column;
@@ -52,4 +51,29 @@
 
 .submit-button {
   margin-top: 16px;
+}
+
+.caption-img {
+  display: none;
+}
+
+@media (width >= 768px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .container-task {
+    display: flex;
+    flex-direction: row;
+    column-gap: 8px;
+  }
+
+  .caption-img {
+    display: block;
+    padding: 24px;
+    width: 50%;
+    object-fit: cover;
+  }
 }
