@@ -36,13 +36,14 @@ export class ListTasksComponent implements OnInit, OnDestroy {
         } else {
           this.filter = 'all';
         }
-        this.addFilter();
       }
     );
+    this.addFilter()
   }
 
   toggleTaskCompletion(task: Task) {
     task.isCompleted = !task.isCompleted;
+    this.tasksService.updateTask(task.id, task.isCompleted);
     this.addFilter();
   }
 

@@ -20,4 +20,13 @@ export class TasksService {
     tasks.push(value);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+
+  public updateTask(id: number, isCompleted: boolean) {
+    const tasks: Task[] = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    if (taskIndex !== -1) {
+      tasks[taskIndex].isCompleted = isCompleted;
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }
 }
