@@ -1,0 +1,70 @@
+.section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.mat-radio-group {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1.5rem;
+}
+
+.tasks-list {
+  overflow-y: auto;
+  max-height: 80vh;
+  list-style: none;
+  padding: 0;
+}
+
+.task-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-status.completed {
+  color: green;
+}
+
+.task-status.pending {
+  color: red;
+}
+
+.task-limit-date {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.persons-list {
+  list-style: none;
+}
+
+.task-persons {
+  margin-top: 1rem;
+}
+
+.person-info {
+  margin-bottom: 0.5rem;
+}
+
+.person-info strong {
+  display: block;
+}
+
+.mat-raised-button {
+  margin-top: 1rem;
+}
