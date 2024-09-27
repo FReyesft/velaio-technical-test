@@ -121,15 +121,6 @@ export class CreateTasksComponent implements OnInit {
     this.skillsArray.removeAt(index);
   }
 
-  editSkill(index: number, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-    if (!value) {
-      this.removeSkill(index);
-    } else {
-      this.skillsArray.at(index).setValue(value);
-    }
-  }
-
   isValidToAddPersons(): boolean {
     return this.taskForm.get('taskAssociatedPersons').valid;
   }

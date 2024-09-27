@@ -56,7 +56,6 @@
                 *ngFor="let skill of skillsArray.controls; let i = index"
                 (removed)="removeSkill(i)"
                 [editable]="true"
-                (edited)="editSkill(i, $event)"
                 [aria-description]="'presione enter para editar ' + skill.value"
               >
                 {{ skill.value }}
