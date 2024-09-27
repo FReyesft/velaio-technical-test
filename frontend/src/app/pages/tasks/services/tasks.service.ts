@@ -13,7 +13,7 @@ export class TasksService {
   }
 
   public addTask(value: Task) {
-    const tasks: Task[] = JSON.parse(localStorage.getItem('tasks'));
+    const tasks: Task[] = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.push(value);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
