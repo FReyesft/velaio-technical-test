@@ -13,7 +13,6 @@
           formControlName="taskName"
         />
       </mat-form-field>
-
       <mat-form-field>
         <mat-label>Fecha limite</mat-label>
         <input
@@ -29,6 +28,7 @@
       </mat-form-field>
       <div class="sub-group-form" formGroupName="taskAssociatedPersons">
         <h3 class="label-form">Personas asociadas:</h3>
+
         <mat-form-field>
           <mat-label>Nombre completo</mat-label>
           <input
@@ -37,6 +37,7 @@
             formControlName="personName"
           />
         </mat-form-field>
+
         <mat-form-field>
           <mat-label>Edad (min 18)</mat-label>
           <input
@@ -46,19 +47,23 @@
             formControlName="personAge"
           />
         </mat-form-field>
+
         <div class="skills-form">
           <mat-form-field class="example-chip-list">
             <mat-label>Habilidades*</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter fruits">
+            <mat-chip-grid #chipGrid aria-label="Enter skills">
               <mat-chip-row
-                *ngFor="let skill of skills"
-                (removed)="removeSkill(skill)"
+                *ngFor="let skill of skillsArray.controls; let i = index"
+                (removed)="removeSkill(i)"
                 [editable]="true"
-                (edited)="editSkill(skill, $event)"
-                [aria-description]="'presione enter ' + skill"
+                (edited)="editSkill(i, $event)"
+                [aria-description]="'presione enter para editar ' + skill.value"
               >
-                {{ skill.name }}
-                <button matChipRemove [attr.aria-label]="'eliminar ' + skill">
+                {{ skill.value }}
+                <button
+                  matChipRemove
+                  [attr.aria-label]="'eliminar ' + skill.value"
+                >
                   <mat-icon>cancel</mat-icon>
                 </button>
               </mat-chip-row>
@@ -78,29 +83,37 @@
       </div>
       <aside class="container-persons--added">
         <h3 class="label-form">
-          Personas asociadas: {{ persons.length || 0 }}
+          Personas asociadas: {{ personsArray.length || 0 }}
         </h3>
         <mat-chip-row
-          *ngFor="let person of persons"
-          (removed)="removePerson(person)"
+          *ngFor="let person of personsArray.controls; let i = index"
+          (removed)="removePerson(i)"
           [editable]="true"
-          [aria-description]="'presione enter ' + person"
+          [aria-description]="
+            'presione enter para editar ' + person.get('name').value
+          "
         >
-          {{ person.name }}
-          <button matChipRemove [attr.aria-label]="'eliminar ' + person">
+          {{ person.get("name").value }}
+          <button
+            matChipRemove
+            [attr.aria-label]="'eliminar ' + person.get('name').value"
+          >
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip-row>
       </aside>
       <button
         class="submit-button"
-        [disabled]="persons.length <= 0"
+        [disabled]="personsArray.length <= 0"
         type="submit"
         mat-raised-button
       >
         Guardar tarea
       </button>
     </form>
-    <img class="caption-img" src="https://www.ntaskmanager.com/wp-content/uploads/2020/01/Task-Management-for-Mac-2.png"/>
+    <img
+      class="caption-img"
+      src="https://www.ntaskmanager.com/wp-content/uploads/2020/01/Task-Management-for-Mac-2.png"
+    />
   </div>
 </section>
