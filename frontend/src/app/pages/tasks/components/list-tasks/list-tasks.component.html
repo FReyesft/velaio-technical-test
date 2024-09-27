@@ -41,9 +41,9 @@
                   <strong>{{ person.name }} ({{ person.age }} años)</strong>
                   <p>
                     Habilidades:
-                    <span *ngFor="let skill of person.skills">
-                      {{ skill.name }}</span
-                    >
+                    <span *ngFor="let skill of person.skills; let last = last">
+                      {{ skill }}<ng-container *ngIf="!last">, </ng-container>
+                    </span>
                   </p>
                 </div>
               </li>
