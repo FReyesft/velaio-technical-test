@@ -48,7 +48,7 @@ export class CreateTasksComponent implements OnInit {
     } else {
       try {
         this.tasksService.addTask({
-          id: this.tasksService?.getTasks()?.length + 1 || 1,
+          id: Number(Date.now()),
           taskName: this.taskForm.get('taskName').value,
           taskLimitDate: this.taskForm.get('taskLimitDate').value,
           persons: this.persons,
