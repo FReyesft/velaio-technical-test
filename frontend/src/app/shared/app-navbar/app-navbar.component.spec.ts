@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppNavbarComponent } from './app-navbar.component';
+import { provideRouter, RouterModule } from '@angular/router';
 
 describe('AppNavbarComponent', () => {
   let component: AppNavbarComponent;
@@ -8,7 +9,9 @@ describe('AppNavbarComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppNavbarComponent]
+      declarations: [AppNavbarComponent],
+      imports: [RouterModule],
+      providers: [provideRouter([])],
     });
     fixture = TestBed.createComponent(AppNavbarComponent);
     component = fixture.componentInstance;
